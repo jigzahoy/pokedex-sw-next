@@ -7,8 +7,13 @@ module.exports = {
     extend: {
       colors: {
       },
+      inset: {
+        '1/2':'50%'
+      }
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('tailwindcss-image-rendering')(), // no options to configure
+  ],
 }

@@ -7,7 +7,7 @@ interface ICaughtPokemon {
   caught?: boolean;
 }
 
-interface IPokeList extends IPokedexType, ICaughtPokemon {}
+export interface IPokeList extends IPokedexType, ICaughtPokemon {}
 
 function searchPokemon(
   search: string | number,
@@ -39,7 +39,6 @@ function mergeCaugthPokemon(
 
 export default function usePokedex() {
   const didMount = useRef(false);
-
   // @TODO: use usePersistedState hook
   // const [caughtPokemon, setCaughtPokemon] = usePersistedState("caught", []);
   const [caughtPokemon, setCaughtPokemon] = useState<ICaughtPokemon[]>([]);
@@ -47,6 +46,14 @@ export default function usePokedex() {
   const [pokemon, setPokemon] = useState<IPokeList[]>(
     mergeCaugthPokemon(caughtPokemon)
   );
+
+  useEffect(() => {
+    if (didMount.current) {
+      const newResult = mergeCaugthPokemon(caughtPokemon, searchedPokemon);
+      setPokemon(newResult);
+    }
+    didMount.current = true;
+  }, [searchedPokemon]);
 
   const toggleCaught = (event: ChangeEvent<HTMLInputElement>) => {
     const { checked, value: pokeID } = event.target;
@@ -63,14 +70,6 @@ export default function usePokedex() {
       );
     }
   };
-
-  useEffect(() => {
-    if (didMount.current) {
-      const newResult = mergeCaugthPokemon(caughtPokemon, searchedPokemon);
-      setPokemon(newResult);
-    }
-    didMount.current = true;
-  }, [searchedPokemon]);
 
   return { pokemon, toggleCaught, setSearchPokemon };
 }

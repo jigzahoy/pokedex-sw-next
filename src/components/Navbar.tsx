@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <NavContainer>
       <div className="flex py-4 justify-items-center">
-        <div className="z-10 w-full max-w-xl mx-auto">
+        <div className="z-10 w-full max-w-md mx-auto">
           <input
             type="text"
             name="poke-search"
