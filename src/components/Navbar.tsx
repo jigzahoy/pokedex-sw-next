@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import PokedexContext from "@contexts/PokedexContext";
 
 const NavContainer = styled.div`
   position: fixed;
@@ -20,28 +22,28 @@ const NavContainer = styled.div`
 `;
 
 export default function Navbar() {
-  // const { setSearchPokemon } =
+  const { setSearchPokemon } = useContext(PokedexContext);
 
-  // const handleSearch = (event) => {
-
-  //   const { value } = event.target;
-  //   if (value.length >= 1) {
-  //     setSearchPokemon(value);
-  //   } else {
-  //     setSearchPokemon("");
-  //   }
-  // };
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    if (value.length >= 1) {
+      setSearchPokemon(value);
+    } else {
+      setSearchPokemon("");
+    }
+  };
 
   return (
     <NavContainer>
-      <div className="flex py-4 justify-items-center">
-        <div className="z-10 w-full max-w-md mx-auto">
+      <div className="flex py-2 justify-items-center">
+        <div className="z-10 flex w-full max-w-md mx-auto">
           <input
             type="text"
             name="poke-search"
             id="poke-search"
             placeholder="Search Pokémon"
-            // onChange={handleSearch}
+            className="px-4 py-2 mx-auto rounded-full outline-none md:ml-0"
+            onChange={handleSearch}
           />
         </div>
       </div>

@@ -17,8 +17,8 @@ const MainContainer = styled.div`
   }
 
   &::after {
-    content: url(../assets/rotom-dex.png);
-    position: absolute;
+    content: url(/assets/rotom-dex.png);
+    position: fixed;
     bottom: -100px;
     left: 10%;
     z-index: 1;
@@ -40,6 +40,7 @@ const SideBars = styled.div`
     height: 100%;
     background: #f4513c;
     transform: skewX(-25deg);
+    z-index: 2;
   }
   &:after {
     content: "";
